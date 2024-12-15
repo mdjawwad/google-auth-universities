@@ -1,0 +1,59 @@
+<div class="nav">
+  <div class="logo">world Universities</div>
+  <div *ngIf="userData" class="left-side">
+    <div class="name">{{ userData.name }}</div>
+    <img [src]="userData.picture" alt="" />
+    <button class="sign-out" (click)="signOut()">Sign out</button>
+  </div>
+</div>
+<div *ngIf="loading" class="loader">
+  <div class="spinner-box">
+    <div class="pulse-container">
+      <div class="pulse-bubble pulse-bubble-1"></div>
+      <div class="pulse-bubble pulse-bubble-2"></div>
+      <div class="pulse-bubble pulse-bubble-3"></div>
+    </div>
+  </div>
+</div>
+
+<figure class="wrapper">
+  <table>
+    <caption class="visually-hidden">
+      Universities List
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col" >Name</th>
+        <th scope="col" >Rating</th>
+        <th scope="col">Address</th>
+        <th scope="col">Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of data
+            | paginate : { itemsPerPage: itemsPerPage, currentPage: page }
+        "
+      >
+        <td scope="row">{{ item.name }}</td>
+        <td>{{ item.graduationRate }}</td>
+        <td>{{ item.fullAddress }}</td>
+        <td>
+          <a [href]="item.website" target="_blank"
+            ><img
+              src="https://images.vexels.com/content/130718/preview/grid-on-globe-icon-e9c50e.png"
+              alt=""
+          /></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+ 
+<pagination-controls
+  (pageChange)="page = $event"
+  previousLabel="Previous"
+  nextLabel="Next"
+>
+</pagination-controls>
