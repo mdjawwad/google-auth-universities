@@ -17,37 +17,29 @@ export class LoginComponent implements OnInit {
       if (typeof google !== 'undefined' && google.accounts) {
         google.accounts.id.initialize({
           client_id: environment.googleClientId,
-          callback: (resp: any) => {
-            this.loginHandle(resp);
-          },
+          callback: (response: any) => this.loginHandle(response),
         });
         google.accounts.id.renderButton(document.getElementById('google-btn'), {
-          theme: 'filled_black',
+          theme: 'outline',
           size: 'large',
-          shape: 'circular',
-          width: 350,
         });
       } else {
-        console.error('Google API failed to load.');
+        console.error('Google API not loaded');
       }
-    }).catch(error => {
-      console.error('Failed to load Google API script:', error);
     });
   }
 
   private loadGoogleScript(): Promise<void> {
     return new Promise((resolve, reject) => {
       if (typeof google !== 'undefined') {
-   
         resolve();
       } else {
-        
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';
         script.async = true;
         script.defer = true;
         script.onload = () => resolve();
-        script.onerror = (error) => reject(error);
+        script.onerror = (err) => reject(err);
         document.head.appendChild(script);
       }
     });

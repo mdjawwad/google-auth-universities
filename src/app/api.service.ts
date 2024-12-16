@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
+ 
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class ApiService {
       {
         headers: {
           'x-rapidapi-key':
-          'ca4196edd7msh2bb3e04fbf39550p131f00jsnb336cae5b509',
+           environment.apiKey,
           'x-rapidapi-host': 'colleges-and-universities.p.rapidapi.com',
         },
       }
