@@ -2,6 +2,7 @@ declare var google: any;
 import { JsonpInterceptor } from '@angular/common/http';
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     google.accounts.id.initialize({
       client_id:
-        '758590368190-sp25ub1u8uqekp6e0va58obgr94vcic9.apps.googleusercontent.com',
+        environment.googleClientId,
       callback: (resp: any) => {
         this.loginHandle(resp);
       },
